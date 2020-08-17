@@ -40,3 +40,8 @@ what is set in application.properties.
 ![fedtax-demo-h2-login](https://user-images.githubusercontent.com/10429019/90343014-d3f2f100-dfda-11ea-965a-70c314cb70f9.png)
 
 ![fedtax-demo-h2-query](https://user-images.githubusercontent.com/10429019/90343022-e3723a00-dfda-11ea-8267-b23a1ba4d3eb.png)
+
+
+## Limitations
+* This project does not take into consideration tax credits, deductions or other relevant info required
+ to calculate a true Federal tax rate.
