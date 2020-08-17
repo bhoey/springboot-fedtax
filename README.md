@@ -15,24 +15,27 @@ amount of income tax owed each year. This program preloads the tax tables for 20
 on startup then provides a web GUI to calculate per-bracket and total tax based off entered
 income and filing status.
 
-## Running Program
+## Live Demo
+A live demo of this project is available at https://fedtax.herokuapp.com
+
+## Running Program Locally
 ```
 mvn spring-boot:run
 ```
 
-## Interacting With The Program
-Browse to http://localhost:8082 and enter different values to see the results.
-
+Then browse to http://localhost:8082 and enter different values to see the results.
 ![fedtax-screenshot](https://user-images.githubusercontent.com/10429019/90343004-c3427b00-dfda-11ea-9ab8-a9c490023af5.png)
 
 ## Examining The H2 Database
-Additionally the H2 Web Console has been enabled with the following application.properties entries: 
+Additionally the H2 Web Console can be enabled by uncommentting the following lines in the application.properties file
+and restarting Spring Boot: 
 
 ```
 spring.h2.console.enabled=true
 spring.h2.console.path=/h2
 ```
-To access the console browse to http://localhost:8082/h2. The connection settings should match what is set in application.properties. 
+To access the H2 console afterwards browse to http://localhost:8082/h2. The connection settings should match 
+what is set in application.properties.
 
 ![fedtax-demo-h2-login](https://user-images.githubusercontent.com/10429019/90343014-d3f2f100-dfda-11ea-965a-70c314cb70f9.png)
 
