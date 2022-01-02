@@ -38,7 +38,7 @@ public class FedTaxController {
                               @RequestParam long filing_status_id,
                               Model model){
 
-        FilingStatus filingStatus = fsrepo.getOne(filing_status_id);
+        FilingStatus filingStatus = fsrepo.getById(filing_status_id);
 
         CalculatorTotalResult taxResult = calculator.determineTax(income, filingStatus, tax_year);
 
