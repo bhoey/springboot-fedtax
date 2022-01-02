@@ -3,13 +3,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Fed Tax Spring Boot Demo</title>
+    <title>US Federal Tax Spring Boot Demo</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body>
     <div class="container">
-        <h1 class="text-center mt-4 mb-4">Fed Tax Spring Boot Demo</h1>
+        <h1 class="text-center mt-4 mb-4">US Federal Tax Spring Boot Demo</h1>
         <form class="form-inline mb-4" action="/process_form" method="POST">
             <div class="form-group">
                 <label for="income" class="col-form-label">Income:</label>
