@@ -11,7 +11,7 @@ This is a demo to showcase the following technologies working together:
 
 ## Project Description
 The US Federal Government uses a [marginal tax rate](https://en.wikipedia.org/wiki/Tax_rate#Marginal) to determine the
-amount of income tax owed each year. This program preloads the tax tables for 2019 and 2020 into an in-memory database
+amount of income tax owed each year. This program preloads the tax tables for 2019-2023 into an in-memory database
 on startup then provides a web GUI to calculate per-bracket and total tax based off entered
 income and filing status.
 
