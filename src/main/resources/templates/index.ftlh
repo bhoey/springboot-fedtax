@@ -10,7 +10,7 @@
 <body>
     <div class="container">
         <h1 class="text-center mt-4 mb-4">US Federal Tax Spring Boot Demo</h1>
-        <form class="form-inline mb-4" action="/process_form" method="POST">
+        <form class="form-inline mb-4" action="" method="POST">
             <div class="form-group">
                 <label for="income" class="col-form-label">Income:</label>
                 <div class="col">

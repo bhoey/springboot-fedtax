@@ -26,17 +26,18 @@ public class FedTaxController {
     private Calculator calculator;
 
     @GetMapping("/")
-    public String index(Model model){
+    public String indexGet(Model model){
         model.addAttribute("filingStatuses", fsrepo.findAll(Sort.by("id").ascending()));
         model.addAttribute("taxYears", tbrepo.getAllTaxYears());
+
         return "index";
     }
 
-    @PostMapping("/process_form")
-    public String processForm(@RequestParam long income,
-                              @RequestParam int tax_year,
-                              @RequestParam long filing_status_id,
-                              Model model){
+    @PostMapping("/")
+    public String indexPost(@RequestParam long income,
+                            @RequestParam int tax_year,
+                            @RequestParam long filing_status_id,
+                            Model model){
 
         FilingStatus filingStatus = fsrepo.getById(filing_status_id);
 
