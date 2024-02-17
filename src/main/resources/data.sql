@@ -4,6 +4,46 @@ INSERT INTO filing_statuses (name)  VALUES ('Married Filing Jointly or Qualified
 INSERT INTO filing_statuses (name)  VALUES ('Married Filing Separately');
 
 ------------------------------------------------------------------------------------------
+-- 2022
+------------------------------------------------------------------------------------------
+INSERT INTO tax_brackets (tax_year, tax_rate, lower_bound, upper_bound, filing_status_id)
+VALUES (2022, 0.1,          0,   10275, (SELECT id FROM filing_statuses WHERE name = 'Single')),
+       (2022, 0.12,    10276,    41775, (SELECT id FROM filing_statuses WHERE name = 'Single')),
+       (2022, 0.22,    41776,    89075, (SELECT id FROM filing_statuses WHERE name = 'Single')),
+       (2022, 0.24,    89075,   170050, (SELECT id FROM filing_statuses WHERE name = 'Single')),
+       (2022, 0.32,   170051,   215950, (SELECT id FROM filing_statuses WHERE name = 'Single')),
+       (2022, 0.35,   215950,   539900, (SELECT id FROM filing_statuses WHERE name = 'Single')),
+       (2022, 0.37,   539901,     null, (SELECT id FROM filing_statuses WHERE name = 'Single'));
+
+INSERT INTO tax_brackets (tax_year, tax_rate, lower_bound, upper_bound, filing_status_id)
+VALUES (2022, 0.1,        0,  20550, (SELECT id FROM filing_statuses WHERE name = 'Married Filing Jointly or Qualified Widow')),
+       (2022, 0.12,  20551,   83550, (SELECT id FROM filing_statuses WHERE name = 'Married Filing Jointly or Qualified Widow')),
+       (2022, 0.22,  83551,  178150, (SELECT id FROM filing_statuses WHERE name = 'Married Filing Jointly or Qualified Widow')),
+       (2022, 0.24, 178151,  340100, (SELECT id FROM filing_statuses WHERE name = 'Married Filing Jointly or Qualified Widow')),
+       (2022, 0.32, 340101,  431900, (SELECT id FROM filing_statuses WHERE name = 'Married Filing Jointly or Qualified Widow')),
+       (2022, 0.35, 431901,  647850, (SELECT id FROM filing_statuses WHERE name = 'Married Filing Jointly or Qualified Widow')),
+       (2022, 0.37, 647851,    null, (SELECT id FROM filing_statuses WHERE name = 'Married Filing Jointly or Qualified Widow'));
+
+INSERT INTO tax_brackets (tax_year, tax_rate, lower_bound, upper_bound, filing_status_id)
+VALUES (2022, 0.1,       0,   14650, (SELECT id FROM filing_statuses WHERE name = 'Head Of Household')),
+       (2022, 0.12,  14651,   55900, (SELECT id FROM filing_statuses WHERE name = 'Head Of Household')),
+       (2022, 0.22,  55901,   89050, (SELECT id FROM filing_statuses WHERE name = 'Head Of Household')),
+       (2022, 0.24,  89051,  170050, (SELECT id FROM filing_statuses WHERE name = 'Head Of Household')),
+       (2022, 0.32, 170051,  215950, (SELECT id FROM filing_statuses WHERE name = 'Head Of Household')),
+       (2022, 0.35, 215951,  539900, (SELECT id FROM filing_statuses WHERE name = 'Head Of Household')),
+       (2022, 0.37, 539901,    null, (SELECT id FROM filing_statuses WHERE name = 'Head Of Household'));
+
+INSERT INTO tax_brackets (tax_year, tax_rate, lower_bound, upper_bound, filing_status_id)
+VALUES (2022, 0.1,        0,   10275,  (SELECT id FROM filing_statuses WHERE name = 'Married Filing Separately')),
+       (2022, 0.12,   10276,   41775,  (SELECT id FROM filing_statuses WHERE name = 'Married Filing Separately')),
+       (2022, 0.22,   41776,   89075,  (SELECT id FROM filing_statuses WHERE name = 'Married Filing Separately')),
+       (2022, 0.24,   89076,  170050,  (SELECT id FROM filing_statuses WHERE name = 'Married Filing Separately')),
+       (2022, 0.32,  170051,  215950,  (SELECT id FROM filing_statuses WHERE name = 'Married Filing Separately')),
+       (2022, 0.35,  215951,  323925,  (SELECT id FROM filing_statuses WHERE name = 'Married Filing Separately')),
+       (2022, 0.37,  323926,    null, (SELECT id FROM filing_statuses WHERE name = 'Married Filing Separately'));
+
+
+------------------------------------------------------------------------------------------
 -- 2021
 ------------------------------------------------------------------------------------------
 INSERT INTO tax_brackets (tax_year, tax_rate, lower_bound, upper_bound, filing_status_id)
