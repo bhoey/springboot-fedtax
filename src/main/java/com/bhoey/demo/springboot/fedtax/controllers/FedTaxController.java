@@ -34,14 +34,14 @@ public class FedTaxController {
     }
 
     @PostMapping("/")
-    public String indexPost(@RequestParam long income,
-                            @RequestParam int tax_year,
-                            @RequestParam long filing_status_id,
+    public String indexPost(@RequestParam(name="income") long income,
+                            @RequestParam(name="tax_year") int taxYear,
+                            @RequestParam(name="filing_status_id") long filingStatusId,
                             Model model){
 
-        FilingStatus filingStatus = fsrepo.getById(filing_status_id);
+        FilingStatus filingStatus = fsrepo.getById(filingStatusId);
 
-        CalculatorTotalResult taxResult = calculator.determineTax(income, filingStatus, tax_year);
+        CalculatorTotalResult taxResult = calculator.determineTax(income, filingStatus, taxYear);
 
         model.addAttribute("filingStatuses", fsrepo.findAll(Sort.by("id").ascending()));
         model.addAttribute("taxYears", tbrepo.getAllTaxYears());
