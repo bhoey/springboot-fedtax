@@ -5,7 +5,6 @@ import com.bhoey.demo.springboot.fedtax.CalculatorTotalResult;
 import com.bhoey.demo.springboot.fedtax.models.FilingStatus;
 import com.bhoey.demo.springboot.fedtax.repositories.FilingStatusRepository;
 import com.bhoey.demo.springboot.fedtax.repositories.TaxBracketRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,14 +15,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class FedTaxController {
 
-    @Autowired
     private FilingStatusRepository fsrepo;
-
-    @Autowired
     private TaxBracketRepository tbrepo;
-
-    @Autowired
     private Calculator calculator;
+
+    public FedTaxController(FilingStatusRepository fsrepo, TaxBracketRepository tbrepo, Calculator calculator){
+        this.fsrepo = fsrepo;
+        this.tbrepo = tbrepo;
+        this.calculator = calculator;
+    }
 
     @GetMapping("/")
     public String indexGet(Model model){
