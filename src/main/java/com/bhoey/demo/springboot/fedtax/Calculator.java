@@ -3,7 +3,6 @@ package com.bhoey.demo.springboot.fedtax;
 import com.bhoey.demo.springboot.fedtax.models.FilingStatus;
 import com.bhoey.demo.springboot.fedtax.models.TaxBracket;
 import com.bhoey.demo.springboot.fedtax.repositories.TaxBracketRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
@@ -13,8 +12,11 @@ import java.util.List;
 @Service
 public class Calculator {
 
-    @Autowired
     private TaxBracketRepository tbrepo;
+
+    public Calculator(TaxBracketRepository tbrepo){
+        this.tbrepo = tbrepo;
+    }
 
     public CalculatorTotalResult determineTax(long income, FilingStatus filingStatus, int tax_year){
         CalculatorTotalResult result = new CalculatorTotalResult();
