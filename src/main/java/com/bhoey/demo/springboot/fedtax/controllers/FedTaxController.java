@@ -6,6 +6,7 @@ import com.bhoey.demo.springboot.fedtax.dtos.FormInputDTO;
 import com.bhoey.demo.springboot.fedtax.models.FilingStatus;
 import com.bhoey.demo.springboot.fedtax.repositories.FilingStatusRepository;
 import com.bhoey.demo.springboot.fedtax.repositories.TaxBracketRepository;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,7 +35,7 @@ public class FedTaxController {
     }
 
     @PostMapping("/")
-    public String indexPost(FormInputDTO formInputDTO,
+    public String indexPost(@Valid FormInputDTO formInputDTO,
                             Model model){
 
         FilingStatus filingStatus = fsrepo.getById(formInputDTO.getFilingStatusId());
