@@ -20,7 +20,7 @@
             <div class="form-group">
                 <label for="filing_status" class="col-form-label">Filing Status:</label>
                 <div class="col">
-                    <select name="filing_status_id" id="filing_status" class="form-control">
+                    <select name="filingStatusId" id="filing_status" class="form-control">
                         <#list filingStatuses as filingStatus>
                             <#if taxResult?has_content && taxResult.filingStatus.id == filingStatus.id>
                                 <option value="${filingStatus.id?c}" selected>${filingStatus.name}</option>
@@ -32,9 +32,9 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="tax_year" class="col-form-label">Tax Year:</label>
+                <label for="taxYear" class="col-form-label">Tax Year:</label>
                 <div class="col">
-                    <select name="tax_year" id="tax_year" class="form-control">
+                    <select name="taxYear" id="taxYear" class="form-control">
                         <#list taxYears as taxYear>
                             <#if taxResult?has_content && taxResult.taxYear == taxYear>
                                 <option selected>${taxYear?c}</option>
