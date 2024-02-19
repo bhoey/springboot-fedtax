@@ -1,4 +1,5 @@
 <#import "/spring.ftl" as spring/>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +7,34 @@
     <title>US Federal Tax Spring Boot Demo</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script>
+        let errors = [];
+
+        function addError(error) {
+            errors.push(error);
+        }
+
+        function displayErrors(){
+            const div = document.getElementById("errorDiv");
+
+            if (errors.length > 0) {
+                const header = document.createElement("h3");
+                header.appendChild(document.createTextNode("Validation Errors"));
+                header.classList.add("text-danger");
+                div.appendChild(header);
+
+                const ul = document.createElement("ul");
+                div.appendChild(ul);
+
+                for (let i = 0; i < errors.length; i++) {
+                    const li = document.createElement("li");
+                    li.appendChild(document.createTextNode(errors[i]));
+                    li.classList.add("text-danger");
+                    ul.appendChild(li);
+                }
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="container">
@@ -14,35 +43,28 @@
             <div class="form-group">
                 <label for="income" class="col-form-label">Income:</label>
                 <div class="col">
-                    <input type="text" id="income" class="form-control"  name="income" value="${(taxResult.income?c)!""}" />
+                    <@spring.formInput "formInputDTO.income" "class=\"form-control\""/>
+                    <#list spring.status.errorMessages as error>
+                        <script>addError("${error}")</script>
+                    </#list>
                 </div>
             </div>
             <div class="form-group">
                 <label for="filing_status" class="col-form-label">Filing Status:</label>
                 <div class="col">
-                    <select name="filingStatusId" id="filing_status" class="form-control">
-                        <#list filingStatuses as filingStatus>
-                            <#if taxResult?has_content && taxResult.filingStatus.id == filingStatus.id>
-                                <option value="${filingStatus.id?c}" selected>${filingStatus.name}</option>
-                             <#else>
-                                 <option value="${filingStatus.id?c}">${filingStatus.name}</option>
-                            </#if>
-                        </#list>
-                    </select>
+                    <@spring.formSingleSelect "formInputDTO.filingStatusId", filingStatusOptions, "class=\"form-control\""/>
+                    <#list spring.status.errorMessages as error>
+                        <script>addError("${error}")</script>
+                    </#list>
                 </div>
             </div>
             <div class="form-group">
                 <label for="taxYear" class="col-form-label">Tax Year:</label>
                 <div class="col">
-                    <select name="taxYear" id="taxYear" class="form-control">
-                        <#list taxYears as taxYear>
-                            <#if taxResult?has_content && taxResult.taxYear == taxYear>
-                                <option selected>${taxYear?c}</option>
-                            <#else>
-                                <option>${taxYear?c}</option>
-                            </#if>
-                        </#list>
-                    </select>
+                    <@spring.formSingleSelect "formInputDTO.taxYear", taxYearOptions, "class=\"form-control\""/>
+                    <#list spring.status.errorMessages as error>
+                        <script>addError("${error}")</script>
+                    </#list>
                 </div>
             </div>
             <div class="form-group">
@@ -52,7 +74,10 @@
             </div>
         </form>
 
-        <#if taxResult?has_content>
+        <div id="errorDiv"/>
+        <script>displayErrors()</script>
+
+        <#if taxResult?has_content && taxResult.bracketTaxes?has_content>
             <table class="table table-hover">
                 <thead>
                     <tr>

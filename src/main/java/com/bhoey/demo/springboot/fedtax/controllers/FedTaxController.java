@@ -10,8 +10,13 @@ import jakarta.validation.Valid;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 @Controller
 public class FedTaxController {
@@ -28,24 +33,49 @@ public class FedTaxController {
 
     @GetMapping("/")
     public String indexGet(Model model){
-        model.addAttribute("filingStatuses", fsrepo.findAll(Sort.by("id").ascending()));
-        model.addAttribute("taxYears", tbrepo.getAllTaxYears());
+
+        model.addAttribute("filingStatusOptions", getFilingStatusOptions());
+        model.addAttribute("taxYearOptions", getTaxYearOptions());
+        model.addAttribute("taxResult", new CalculatorTotalResult());
+
+        model.addAttribute("formInputDTO", new FormInputDTO());
 
         return "index";
     }
 
     @PostMapping("/")
     public String indexPost(@Valid FormInputDTO formInputDTO,
+                            BindingResult bindingResult,
                             Model model){
 
         FilingStatus filingStatus = fsrepo.getById(formInputDTO.getFilingStatusId());
 
-        CalculatorTotalResult taxResult = calculator.determineTax(formInputDTO.getIncome(), filingStatus, formInputDTO.getTaxYear());
+        model.addAttribute("filingStatusOptions", getFilingStatusOptions());
+        model.addAttribute("taxYearOptions", getTaxYearOptions());
+        model.addAttribute("taxResult", new CalculatorTotalResult());
+        model.addAttribute("formInputDTO", formInputDTO);
 
-        model.addAttribute("filingStatuses", fsrepo.findAll(Sort.by("id").ascending()));
-        model.addAttribute("taxYears", tbrepo.getAllTaxYears());
-        model.addAttribute("taxResult", taxResult);
+        if (!bindingResult.hasErrors()){
+            CalculatorTotalResult taxResult = calculator.determineTax(formInputDTO.getIncome(), filingStatus, formInputDTO.getTaxYear());
+            model.addAttribute("taxResult", taxResult);
+        }
 
         return "index";
+    }
+
+    public Map<String, String> getFilingStatusOptions(){
+        Map<String, String> map = new TreeMap<>();
+        List<FilingStatus> filingStatusList = fsrepo.findAll(Sort.by("id").ascending());
+        for (FilingStatus fs: filingStatusList){
+            map.put(fs.getId().toString(), fs.getName());
+        }
+        return map;
+    }
+
+    public List<String> getTaxYearOptions(){
+        return tbrepo.getAllTaxYears()
+                        .stream()
+                        .map(Object::toString)
+                        .collect(Collectors.toUnmodifiableList());
     }
 }
