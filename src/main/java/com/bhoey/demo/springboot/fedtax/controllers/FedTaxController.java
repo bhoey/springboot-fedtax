@@ -7,6 +7,8 @@ import com.bhoey.demo.springboot.fedtax.models.FilingStatus;
 import com.bhoey.demo.springboot.fedtax.repositories.FilingStatusRepository;
 import com.bhoey.demo.springboot.fedtax.repositories.TaxBracketRepository;
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,8 @@ import java.util.stream.Collectors;
 
 @Controller
 public class FedTaxController {
+
+    Logger logger = LoggerFactory.getLogger(FedTaxController.class);
 
     private FilingStatusRepository fsrepo;
     private TaxBracketRepository tbrepo;
@@ -61,7 +65,7 @@ public class FedTaxController {
         }
 
         if (bindingResult.hasErrors()){
-            // TODO: Log error
+            logger.error("Form binding error(s): " + bindingResult);
         }
         else{
             CalculatorTotalResult taxResult = calculator.determineTax(formInputDTO.getIncome(), filingStatusOpt.get(), formInputDTO.getTaxYear());
