@@ -37,4 +37,17 @@ class FedtaxApplicationTests {
         .andExpect(content().string(containsString("<b>Approx. Federal Income Tax:</b> $17,400<br/>")))
         ;
     }
+
+    @Test
+    void testBadPost_BadFilingStatusId(@Autowired MockMvc mvc) throws Exception {
+        mvc.perform(
+                        post("/")
+                                .param("income", "100000")
+                                .param("taxYear", "2023")
+                                .param("filingStatusId", "9999")
+                )
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("addError(\"Invalid filing status id\")")))
+        ;
+    }
 }

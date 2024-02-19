@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
@@ -48,15 +49,22 @@ public class FedTaxController {
                             BindingResult bindingResult,
                             Model model){
 
-        FilingStatus filingStatus = fsrepo.getById(formInputDTO.getFilingStatusId());
-
         model.addAttribute("filingStatusOptions", getFilingStatusOptions());
         model.addAttribute("taxYearOptions", getTaxYearOptions());
         model.addAttribute("taxResult", new CalculatorTotalResult());
         model.addAttribute("formInputDTO", formInputDTO);
 
-        if (!bindingResult.hasErrors()){
-            CalculatorTotalResult taxResult = calculator.determineTax(formInputDTO.getIncome(), filingStatus, formInputDTO.getTaxYear());
+        Optional<FilingStatus> filingStatusOpt = fsrepo.findById(formInputDTO.getFilingStatusId());
+
+        if (filingStatusOpt.isEmpty()) {
+            bindingResult.rejectValue("filingStatusId", "error.formInputDTO", "Invalid filing status id");
+        }
+
+        if (bindingResult.hasErrors()){
+            // TODO: Log error
+        }
+        else{
+            CalculatorTotalResult taxResult = calculator.determineTax(formInputDTO.getIncome(), filingStatusOpt.get(), formInputDTO.getTaxYear());
             model.addAttribute("taxResult", taxResult);
         }
 
