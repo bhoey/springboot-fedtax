@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public class Calculator {
 
-    private TaxBracketRepository tbrepo;
+    private final TaxBracketRepository tbrepo;
 
     public Calculator(TaxBracketRepository tbrepo){
         this.tbrepo = tbrepo;

@@ -24,11 +24,11 @@ import java.util.stream.Collectors;
 @Controller
 public class FedTaxController {
 
-    Logger logger = LoggerFactory.getLogger(FedTaxController.class);
+    private final Logger logger = LoggerFactory.getLogger(FedTaxController.class);
 
-    private FilingStatusRepository fsrepo;
-    private TaxBracketRepository tbrepo;
-    private Calculator calculator;
+    private final FilingStatusRepository fsrepo;
+    private final TaxBracketRepository tbrepo;
+    private final Calculator calculator;
 
     public FedTaxController(FilingStatusRepository fsrepo, TaxBracketRepository tbrepo, Calculator calculator){
         this.fsrepo = fsrepo;
