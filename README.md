@@ -16,7 +16,7 @@ on startup then provides a web GUI to calculate per-bracket and total tax based 
 income and filing status.
 
 ## Live Demo
-A live demo of this project is available at https://fedtax.herokuapp.com
+A live demo of this project is available at https://fedtax-demo.bhoey.com
 
 ## Running Program Locally
 ```
