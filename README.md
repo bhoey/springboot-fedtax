@@ -6,7 +6,7 @@ This is a demo to showcase the following technologies working together:
 * Spring Boot
 * Spring JPA
 * Apache Freemarker
-* BootStrap 4
+* BootStrap 5
 * H2 Database
 
 ## Project Description

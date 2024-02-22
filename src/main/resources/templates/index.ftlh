@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>US Federal Tax Spring Boot Demo</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script>
         let errors = [];
@@ -39,36 +39,46 @@
 <body>
     <div class="container">
         <h1 class="text-center mt-4 mb-4">US Federal Tax Spring Boot Demo</h1>
-        <form class="form-inline mb-4" action="" method="POST">
-            <div class="form-group">
-                <label for="income" class="col-form-label">Income:</label>
-                <div class="col">
-                    <@spring.formInput "formInputDTO.income" "class=\"form-control\""/>
-                    <#list spring.status.errorMessages as error>
-                        <script>addError("${error}")</script>
-                    </#list>
+
+        <form class="d-flex flex-row align-items-center flex-wrap mb-3" action="" method="POST">
+            <div class="row">
+                <div class="col-auto align-self-center">
+                    <label for="income">Income:</label>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="filing_status" class="col-form-label">Filing Status:</label>
-                <div class="col">
-                    <@spring.formSingleSelect "formInputDTO.filingStatusId", filingStatusOptions, "class=\"form-control\""/>
-                    <#list spring.status.errorMessages as error>
-                        <script>addError("${error}")</script>
-                    </#list>
+                <div class="col-2">
+                    <div class="input-group">
+                        <@spring.formInput "formInputDTO.income" "class=\"form-control\""/>
+                        <#list spring.status.errorMessages as error>
+                            <script>addError("${error}")</script>
+                        </#list>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="taxYear" class="col-form-label">Tax Year:</label>
-                <div class="col">
-                    <@spring.formSingleSelect "formInputDTO.taxYear", taxYearOptions, "class=\"form-control\""/>
-                    <#list spring.status.errorMessages as error>
-                        <script>addError("${error}")</script>
-                    </#list>
+
+                <div class="col-auto align-self-center">
+                    <label for="filing_status">Filing Status:</label>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col">
+                <div class="col-auto">
+                    <div class="input-group">
+                        <@spring.formSingleSelect "formInputDTO.filingStatusId", filingStatusOptions, "class=\"form-select\""/>
+                        <#list spring.status.errorMessages as error>
+                            <script>addError("${error}")</script>
+                        </#list>
+                    </div>
+                </div>
+
+                <div class="col-auto align-self-center">
+                    <label for="taxYear">Tax Year:</label>
+                </div>
+                <div class="col-auto align-self-center">
+                    <div class="input-group">
+                        <@spring.formSingleSelect "formInputDTO.taxYear", taxYearOptions, "class=\"form-select\""/>
+                        <#list spring.status.errorMessages as error>
+                            <script>addError("${error}")</script>
+                        </#list>
+                    </div>
+                </div>
+
+                <div class="col-auto align-self-center">
                     <button type="submit" class="form-control">Submit</button>
                 </div>
             </div>
@@ -117,9 +127,8 @@
         </p>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 
 </body>
 </html>
